@@ -1,6 +1,6 @@
 package agents;
 
-import cellularmodel.TrafficCell;
+import cellularmodel.Cell;
 
 public class Vehicle implements Agent{
 
@@ -46,21 +46,11 @@ public class Vehicle implements Agent{
 	 */
 	private Direction nextDrivingDirection;
 	
-	
 	/**
 	 * 
 	 */
-	private TrafficCell previousCell;
+	private Cell currentCell;
 	
-	/**
-	 * 
-	 */
-	private TrafficCell currentCell;
-	
-	/**
-	 * 
-	 */
-	private TrafficCell nextCell;
 	
 	// velocity [m/s]
 	// acceleration [m/s^2]
