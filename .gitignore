@@ -1,7 +1,6 @@
 .metadata/
 .project/
 .settings/
-/RemoteSystemsTempFiles/
 
 # from github.com/github/gitignore/blob/master/Global/Eclipse.gitignore
 
@@ -55,3 +54,4 @@ local.properties
 
 # Code Recommenders
 .recommenders/
+/RemoteSystemsTempFiles
