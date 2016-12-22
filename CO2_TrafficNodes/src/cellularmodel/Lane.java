@@ -12,10 +12,10 @@ public class Lane {
 		return cells;
 	}
 
-	public Lane(int numberOfCells, int invert) {
+	public Lane(int numberOfCells, boolean invert) {
 		createCells(numberOfCells);
 		
-		if(invert == 0){
+		if(invert == true){
 			this.reverse();
 		}
 	}
@@ -31,13 +31,13 @@ public class Lane {
 	
 	private void createCells(int numberOfCells) {
 		if(cells.isEmpty()){
-			cells.add(new Cell());				
+			cells.add(new Cell(cells.size()));				
 		}
 		
 		for(int i = 1; i < numberOfCells; i++){
-			System.out.println("new Cell: " + i);
+//			System.out.println("new Cell: " + i);
 			
-			Cell newCell = new Cell();
+			Cell newCell = new Cell(i);
 			newCell.setPreviousCell(cells.get(i-1));
 			cells.add(newCell);
 			cells.get(i-1).setNextCell(newCell);
@@ -55,13 +55,16 @@ public class Lane {
 		}
 	}
 	
-	
 	@Override
 	public String toString() {
-		String s = "0";
+		String s = "";
 		
 		for(Cell cell : cells){
-			s += cell.toString();
+			if(cell.getVehicle() != null){
+				s+= " X ";
+			}else{
+				s+= " O ";
+			}
 		}
 		return s;
 	}

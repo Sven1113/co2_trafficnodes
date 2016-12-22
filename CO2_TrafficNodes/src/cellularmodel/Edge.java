@@ -18,7 +18,7 @@ public class Edge {
 	private void createLanes(int  numOfLanes, int numberOfCells) {
 		
 		for(int i = 0; i < numOfLanes; i++){
-			lanes.add(new Lane(numberOfCells, i % 2));			
+			lanes.add(new Lane(numberOfCells, (i % 2) == 0));			
 			System.out.println("Line number: " + i);
 		}
 	}
