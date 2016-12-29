@@ -1,11 +1,15 @@
 package cellularmodel;
 
 import agents.Agent;
-import simulation.TimeComponent;
 
-public class TrafficLight implements TrafficRegulation, Agent, TimeComponent {
+public class TrafficLight implements TrafficRegulation, Agent {
 
-	private Node node;
+	private Node juctionNode;
+	
+	public TrafficLight(Node juctionNode) {
+		super();
+		this.juctionNode = juctionNode;
+	}
 
 	@Override
 	public boolean update() {

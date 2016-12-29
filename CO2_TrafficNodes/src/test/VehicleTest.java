@@ -18,5 +18,7 @@ public class VehicleTest {
 		System.out.println("distance: " + vehicle.distanceToNextVehicle());
 		System.out.println("distance: " + vehicle1.distanceToNextVehicle());
 		
+		vehicle.moveForward(3);
+		System.out.println(lane.toString());
 	}
 }

@@ -87,7 +87,7 @@ public class Vehicle implements Agent {
 				return i;
 			}
 		} catch (Exception e) {
-
+			throw e;
 		}
 		return i;
 	}
@@ -95,16 +95,25 @@ public class Vehicle implements Agent {
 	// TODO
 	public boolean moveForward(int i) {
 		// throw new UnsupportedOperationException();
-
-		Cell nextCell = this.currentCell.getNextCell();
-		if (nextCell != null) {
-			this.currentCell.setVehicle(null);
-			this.currentCell = nextCell;
-			nextCell.setVehicle(this);
-			return true;
+		Cell nextCell;
+		for(int s = 0; s < i; s++){
+			nextCell = this.currentCell.getNextCell();
+			if (nextCell != null) {
+				this.currentCell.setVehicle(null);
+				this.currentCell = nextCell;
+				nextCell.setVehicle(this);
+				return true;
+			}
+			System.out.println("one false");
+			return false;
 		}
-
-		return false;
+		System.out.println("two false");
+		return false;	
 	}
 
+	@Override
+	public boolean update() {
+		moveForward(1);
+		return false;
+	}
 }
