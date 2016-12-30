@@ -3,24 +3,36 @@ package cellularmodel;
 import agents.Vehicle;
 
 public class Cell {
-
-	public Cell(int id) {
-		super();
-		this.id = id;
-	}
-
-	public int id;
+	
 	
 	// parameter
+	public int id;
+	
 	private double size = Constants.cellSize;	
 	private Vehicle vehicle;
 
 	private Cell nextCell;
 	private Cell previousCell;
 	
+	private Lane lane;
+	
+
+
 	protected double co2Emission = 0;
+	
+
+	// constructor
+	public Cell(int id, Lane lane) {
+		super();
+		this.id = id;
+		this.lane = lane;
+	}
 
 	// getter
+	public Lane getLane() {
+		return lane;
+	}
+	
 	public Vehicle getVehicle() {
 		return vehicle;
 	}

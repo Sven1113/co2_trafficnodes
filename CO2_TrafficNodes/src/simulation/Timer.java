@@ -7,46 +7,84 @@ import agents.Agent;
 import agents.Vehicle;
 import cellularmodel.Cell;
 import cellularmodel.Edge;
+import cellularmodel.VehicleBuilder;
 
-public class Timer {
+public final class Timer {
 
-	long currentTime;
-	long endTime;
-	List<Edge> edges = new ArrayList<Edge>();
+	private static long currentTime;
+	private static long endTime;
+	public static List<Edge> getEdges() {
+		return edges;
+	}
+
+	public static void setEdges(List<Edge> edges) {
+		Timer.edges = edges;
+	}
+
+	public static List<Agent> getAgents() {
+		return agents;
+	}
+	public static List<Agent> getExpiredAgents() {
+		return expiredAgents;
+	}
+
+	public static void setAgents(List<Agent> agents) {
+		Timer.agents = agents;
+	}
+
+	public static long getCurrentTime() {
+		return currentTime;
+	}
+
+	public static long getEndTime() {
+		return endTime;
+	}
+
+
+	static List<Edge> edges = new ArrayList<Edge>();
 	
-	List<Agent> agents = new ArrayList<Agent>();
+	static List<Agent> agents = new ArrayList<Agent>();
 	
-	public Timer() {
-		// TODO Auto-generated constructor stub
+	static List<Agent> expiredAgents = new ArrayList<Agent>();
+
+	public static void calculate(){
+		for(Agent agent : agents){
+			agent.calculate();
+		}
 	}
 	
-	public Timer(long endTime) {
-		this.endTime = endTime;
-	}
-	public Timer(long endTime, List<Edge> edges) {
-		this.edges = edges;
-		this.endTime = endTime;
-	}
-	
-	public void update(){
+	public static void update(){
 		for(Agent agent : agents){
 			agent.update();
 		}
 	}
 
-	public void startSimulation() {
+	public static void startSimulation() {
+		VehicleBuilder builder = new VehicleBuilder(.2, getEdges());
+		
 		for(int i = 0; i < endTime; i++){
-			this.update();
-			printEdges();
 			System.out.println("currentTime: " + i);
+			
+			calculate();
+			update();
+			agents.addAll(builder.generateVehicle());
+			printEdges();
+			
+			agents.removeAll(expiredAgents);
+			expiredAgents.clear();
 			currentTime++;
 		}
 	}
 	
-	void printEdges(){
+	static void  printEdges(){
 		for(Edge edge : edges){
-			System.out.println(edge.name + ":\n" + edge.toString());
+			System.out.println(edge.getName() + ":\n" + edge.toString());
 		}
 		System.out.println("----------------------");
+	}
+
+
+	public static void setSimulationTime(int i) {
+		endTime = i;		
 	}
 }
